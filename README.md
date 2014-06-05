@@ -18,5 +18,8 @@ import scalaz._ Scalaz._
 import timez._ Timez._
 
 scala> now[LocalDate]
+res0: java.time.LocalDate = 2014-06-06
 
+scala> 2.hours + 3.minutes
+res1: java.time.Duration = PT2H3M
 ```
