@@ -1,6 +1,6 @@
 name := "timez"
 
-version := "1.0"
+version := "0.1"
 
 libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.0.6"
 
