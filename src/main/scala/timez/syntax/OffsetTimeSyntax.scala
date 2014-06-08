@@ -9,21 +9,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 30/May/2014
- * @version 30/May/2014
+ * @author Alex Westphal 09/Jun/2014
+ * @version 09/Jun/2014
  */
 package timez.syntax
 
-import java.time._
+import java.time.{LocalDate, OffsetTime}
 import scalaz.syntax.Ops
-import java.time.temporal.TemporalAmount
 
-trait LocalDateTimeOps extends Ops[LocalDateTime] {
+trait OffsetTimeOps extends Ops[OffsetTime] {
 
+  def &(date: LocalDate) = self.atDate(date)
 }
 
-trait LocalDateTimeSyntax {
-  implicit def ToLocalDateOps(ld: LocalDateTime) = new LocalDateTimeOps {
-    override def self = ld
+trait OffsetTimeSyntax {
+
+  implicit def ToOffsetTimeOps(time: OffsetTime) = new OffsetTimeOps {
+    override def self = time
   }
 }

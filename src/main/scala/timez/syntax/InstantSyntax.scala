@@ -16,20 +16,15 @@ package timez.syntax
 
 import java.time.{ZoneId, ZoneOffset, Instant}
 import scalaz.syntax.Ops
-import java.time.temporal.TemporalAmount
 
 trait InstantOps extends Ops[Instant] {
 
-  def +(amount: TemporalAmount) = self.plus(amount)
-  def -(amount: TemporalAmount) = self.minus(amount)
-
   def &(offset: ZoneOffset) = self.atOffset(offset)
   def &(zone: ZoneId) = self.atZone(zone)
-
 }
 
 trait InstantSyntax {
   implicit def ToInstantOps(instant: Instant) = new InstantOps {
-    override def self: Instant = instant
+    override def self = instant
   }
 }

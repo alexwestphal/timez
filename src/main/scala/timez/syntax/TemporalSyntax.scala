@@ -14,11 +14,14 @@
  */
 package timez.syntax
 
-import java.time.temporal.Temporal
+import java.time.temporal.{TemporalAmount, Temporal}
 import scalaz.syntax.Ops
 import java.time.Duration
 
 trait TemporalOps extends Ops[Temporal] {
+
+  def +(amount: TemporalAmount) = self plus amount
+  def -(amount: TemporalAmount) = self minus amount
 
   def <->(end: Temporal): Duration = Duration.between(self,end)
 }

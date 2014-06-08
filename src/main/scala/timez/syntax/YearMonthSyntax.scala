@@ -14,12 +14,14 @@
  */
 package timez.syntax
 
+import java.time.YearMonth
 import scalaz.syntax.Ops
-import java.time.{LocalDate, YearMonth}
 
 trait YearMonthOps extends Ops[YearMonth] {
 
-  def ~(dayOfMonth: Int): LocalDate = self.atDay(dayOfMonth)
+  def &(dayOfMonth: Int) = self.atDay(dayOfMonth)
+  def ~(dayOfMonth: Int) = self.atDay(dayOfMonth)
+
 }
 
 trait YearMonthSyntax {

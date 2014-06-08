@@ -14,18 +14,16 @@
  */
 package timez.syntax
 
-import java.time._
+import java.time.{Period, OffsetTime, LocalTime, LocalDate}
 import scalaz.syntax.Ops
-import java.time.temporal.TemporalAmount
+
+
 
 trait LocalDateOps extends Ops[LocalDate] {
 
-  def +(amount: TemporalAmount) = self plus amount
-  def -(amount: TemporalAmount) = self minus amount
-
-  def &(hour: Int, minute: Int): LocalDateTime = self.atTime(hour, minute)
-  def &(hour: Int, minute: Int, second: Int): LocalDateTime = self.atTime(hour, minute, second)
-  def &(hour: Int, minute: Int, second: Int, nano: Int): LocalDateTime = self.atTime(hour, minute, second, nano)
+  def &(hour: Int, minute: Int) = self.atTime(hour, minute)
+  def &(hour: Int, minute: Int, second: Int) = self.atTime(hour, minute, second)
+  def &(hour: Int, minute: Int, second: Int, nano: Int) = self.atTime(hour, minute, second, nano)
 
   def &(time: LocalTime) = self atTime time
   def &(time: OffsetTime) = self atTime time

@@ -15,7 +15,16 @@
 package timez.instances
 
 import java.time.OffsetTime
+import scalaz.{Show, Ordering, Order}
+import timez.{Parse, Now}
 
 trait OffsetTimeInstances {
 
+  implicit val OffsetTimeNow = Now.instance(OffsetTime.now, OffsetTime.now)
+
+  implicit val OffsetTimeOrder = Order.order { (x: OffsetTime, y: OffsetTime) => Ordering.fromInt(x compareTo y) }
+
+  implicit val OffsetTimeParse = Parse.instance(OffsetTime.parse, OffsetTime.parse)
+
+  implicit val OffsetTimeShow = Show.showA[OffsetTime]
 }

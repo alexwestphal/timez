@@ -15,7 +15,8 @@
 package timez.syntax
 
 trait AllSyntax extends DayOfWeekSyntax with DurationSyntax with InstantSyntax with IntSyntax with LocalDateSyntax
-  with LocalDateTimeSyntax with LocalTimeSyntax with MonthDaySyntax with ParseSyntax with PeriodSyntax
-  with TemporalSyntax with YearMonthSyntax
+  with LocalDateTimeSyntax with LocalTimeSyntax with MonthSyntax with MonthDaySyntax with OffsetDateTimeSyntax
+  with OffsetTimeSyntax with ParseSyntax with PeriodSyntax with TemporalSyntax with YearSyntax with YearMonthSyntax
+  with ZonedDateTimeSyntax with ZoneIdSyntax with ZoneOffsetSyntax
 
 object AllSyntax extends AllSyntax

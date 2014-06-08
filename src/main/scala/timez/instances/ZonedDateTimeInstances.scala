@@ -15,7 +15,16 @@
 package timez.instances
 
 import java.time.ZonedDateTime
+import scalaz.{Show, Ordering, Order}
+import timez.{Parse, Now}
 
 trait ZonedDateTimeInstances {
 
+  implicit val ZonedDateTimeNow = Now.instance(ZonedDateTime.now, ZonedDateTime.now)
+
+  implicit val ZonedDateTimeOrder = Order.order { (x: ZonedDateTime, y: ZonedDateTime) => Ordering.fromInt(x compareTo y) }
+
+  implicit val ZonedDateTimeParse = Parse.instance(ZonedDateTime.parse, ZonedDateTime.parse)
+
+  implicit val ZonedDateTimeShow = Show.showA[ZonedDateTime]
 }

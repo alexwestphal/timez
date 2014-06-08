@@ -20,9 +20,6 @@ import java.time.temporal.TemporalAmount
 
 trait LocalTimeOps extends Ops[LocalTime] {
 
-  def +(amount: TemporalAmount) = self plus amount
-  def -(amount: TemporalAmount) = self minus amount
-
   def &(date: LocalDate) = self atDate date
   def &(offset: ZoneOffset) = self atOffset offset
 }

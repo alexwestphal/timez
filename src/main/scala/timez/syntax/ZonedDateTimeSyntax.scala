@@ -9,19 +9,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 29/May/2014
- * @version 29/May/2014
+ * @author Alex Westphal 09/Jun/2014
+ * @version 09/Jun/2014
  */
-package timez.struct
+package timez.syntax
 
-import java.time.{LocalDate, Month}
+import java.time.ZonedDateTime
+import scalaz.syntax.Ops
 
+trait ZonedDateTimeOps extends Ops[ZonedDateTime] {
 
-object YMD {
+}
 
-  def apply(year: Int, month: Int, dayOfMonth: Int) = LocalDate.of(year, month, dayOfMonth)
-  def apply(year: Int, month: Month, dayOfMonth: Int) = LocalDate.of(year, month, dayOfMonth)
-
-  def unapply(date: LocalDate): Option[(Int, Month, Int)] =
-    if(null == date) None else Some(date.getYear, date.getMonth, date.getDayOfMonth)
+trait ZonedDateTimeSyntax {
+  implicit def ToZonedDateTimeOps(dateTime: ZonedDateTime) = new ZonedDateTimeOps {
+    override def self = dateTime
+  }
 }

@@ -15,7 +15,11 @@
 package timez.instances
 
 import java.time.ZoneOffset
+import scalaz.{Ordering, Order, Show}
 
 trait ZoneOffsetInstances {
 
+  implicit def ZoneOffsetOrder = Order order { (x: ZoneOffset, y: ZoneOffset) => Ordering.fromInt(x compareTo y) }
+
+  implicit def ZoneOffsetShow = Show.showA[ZoneOffset]
 }

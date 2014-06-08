@@ -9,17 +9,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 29/May/2014
- * @version 29/May/2014
+ * @author Alex Westphal 09/Jun/2014
+ * @version 09/Jun/2014
  */
-package timez.struct
+package timez.syntax
 
-import java.time.LocalDate
+import scalaz.syntax.Ops
+import java.time.ZoneOffset
 
-object YD {
+trait ZoneOffsetOps extends Ops[ZoneOffset] {
 
-  def apply(year: Int, dayOfYear: Int) = LocalDate.ofYearDay(year, dayOfYear)
+}
 
-  def unapply(date: LocalDate): Option[(Int, Int)] =
-    if(null == date) None else Some(date.getYear, date.getDayOfYear)
+trait ZoneOffsetSyntax {
+  implicit def ToZoneOffsetOps(zoneOffset: ZoneOffset) = new ZoneOffsetOps {
+    override def self = zoneOffset
+  }
 }

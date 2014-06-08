@@ -15,7 +15,11 @@
 package timez.instances
 
 import java.time.ZoneId
+import scalaz.{Equal, Show}
 
 trait ZonedIdInstances {
 
+  implicit def ZoneIdEqual = Equal.equalA[ZoneId]
+
+  implicit def ZoneIdShow = Show.showA[ZoneId]
 }

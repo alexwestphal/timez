@@ -15,7 +15,16 @@
 package timez.instances
 
 import java.time.Year
+import scalaz.{Order, Show}
+import timez.{Now, Parse}
 
 trait YearInstances {
 
+  implicit val YearNow = Now.instance(Year.now, Year.now)
+
+  implicit def YearOrder = Order orderBy { year: Year => year.getValue }
+
+  implicit def YearParse = Parse.instance(Year.parse, Year.parse)
+
+  implicit def YearShow = Show.showA[Year]
 }

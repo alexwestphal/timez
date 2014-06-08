@@ -9,21 +9,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 30/May/2014
- * @version 30/May/2014
+ * @author Alex Westphal 09/Jun/2014
+ * @version 09/Jun/2014
  */
 package timez.syntax
 
-import java.time._
+import java.time.{MonthDay, Month, Year}
 import scalaz.syntax.Ops
-import java.time.temporal.TemporalAmount
 
-trait LocalDateTimeOps extends Ops[LocalDateTime] {
+trait YearOps extends Ops[Year] {
 
+  def &(day: Int) = self.atDay(day)
+  def &(month: Month) = self.atMonth(month)
+  def &(monthDay: MonthDay) = self.atMonthDay(monthDay)
 }
 
-trait LocalDateTimeSyntax {
-  implicit def ToLocalDateOps(ld: LocalDateTime) = new LocalDateTimeOps {
-    override def self = ld
+trait YearSyntax {
+
+  implicit def ToYearOps(year: Year) = new YearOps {
+    override def self = year
   }
 }

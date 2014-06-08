@@ -14,9 +14,9 @@
  */
 package timez.instances
 
-import java.time.{LocalDateTime, LocalTime}
-import timez.{Parse, Now}
+import java.time.LocalTime
 import scalaz.{Show, Ordering, Order}
+import timez.{Parse, Now}
 
 trait LocalTimeInstances {
 
@@ -24,7 +24,7 @@ trait LocalTimeInstances {
 
   implicit val LocalTimeOrder = Order.order { (x: LocalTime, y: LocalTime) => Ordering.fromInt(x compareTo y) }
 
-  implicit val LocalTimeParse = Parse.instance(LocalTime.parse, LocalDateTime.parse)
+  implicit val LocalTimeParse = Parse.instance(LocalTime.parse, LocalTime.parse)
 
   implicit val LocalTimeShow = Show.showA[LocalTime]
 }

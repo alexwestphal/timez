@@ -22,7 +22,7 @@ trait LocalDateInstances {
 
   implicit val LocalDateNow = Now.instance(LocalDate.now, LocalDate.now)
 
-  implicit val LocaDateOrder = Order.order { (x: LocalDate, y: LocalDate) => Ordering.fromInt(x compareTo y) }
+  implicit val LocaDateOrder = Order order { (x: LocalDate, y: LocalDate) => Ordering.fromInt(x compareTo y) }
 
   implicit val LocalDateParse = Parse.instance(LocalDate.parse, LocalDate.parse)
 
