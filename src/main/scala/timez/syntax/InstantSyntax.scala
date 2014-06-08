@@ -15,12 +15,17 @@
 package timez.syntax
 
 import java.time.{ZoneId, ZoneOffset, Instant}
-import scalaz.syntax.Ops
+import java.time.temporal.TemporalField
 
 trait InstantOps extends Ops[Instant] {
 
   def &(offset: ZoneOffset) = self.atOffset(offset)
   def &(zone: ZoneId) = self.atZone(zone)
+
+  def apply(field: TemporalField) = self.get(field)
+
+  def epochSecond = self.getEpochSecond
+  def nano = self.getNano
 }
 
 trait InstantSyntax {

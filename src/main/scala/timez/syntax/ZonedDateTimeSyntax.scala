@@ -15,10 +15,22 @@
 package timez.syntax
 
 import java.time.ZonedDateTime
-import scalaz.syntax.Ops
+import java.time.temporal.TemporalField
 
 trait ZonedDateTimeOps extends Ops[ZonedDateTime] {
 
+  def apply(field: TemporalField) = self.get(field)
+
+  def dayOfMonth = self.getDayOfMonth
+  def dayofWeek = self.getDayOfWeek
+  def dayofYear = self.getDayOfYear
+  def hour = self.getHour
+  def minute = self.getMinute
+  def month = self.getMonth
+  def offset = self.getOffset
+  def second = self.getSecond
+  def year = self.getYear
+  def zone = self.getZone
 }
 
 trait ZonedDateTimeSyntax {

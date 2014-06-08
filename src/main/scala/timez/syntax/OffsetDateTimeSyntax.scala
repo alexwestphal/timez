@@ -15,10 +15,22 @@
 package timez.syntax
 
 import java.time.OffsetDateTime
-import scalaz.syntax.Ops
+import java.time.temporal.TemporalField
 
 trait OffsetDateTimeOps extends Ops[OffsetDateTime] {
 
+  def apply(field: TemporalField) = self.get(field)
+
+  def dayOfMonth = self.getDayOfMonth
+  def dayOfWeek = self.getDayOfWeek
+  def dayOfYear = self.getDayOfYear
+  def hour = self.getHour
+  def minute = self.getMinute
+  def month = self.getMonth
+  def nano = self.getNano
+  def offset = self.getOffset
+  def second = self.getSecond
+  def year = self.getYear
 }
 
 trait OffsetDateTimeSyntax {

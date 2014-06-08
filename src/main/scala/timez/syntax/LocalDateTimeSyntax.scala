@@ -15,11 +15,24 @@
 package timez.syntax
 
 import java.time._
-import scalaz.syntax.Ops
-import java.time.temporal.TemporalAmount
+import java.time.temporal.TemporalField
 
 trait LocalDateTimeOps extends Ops[LocalDateTime] {
 
+  def &(offset: ZoneOffset) = self.atOffset(offset)
+  def &(zone: ZoneId) = self.atZone(zone)
+
+  def apply(field: TemporalField) = self.get(field)
+
+  def dayOfMonth = self.getDayOfMonth
+  def dayOfWeek = self.getDayOfWeek
+  def dayOfYear = self.getDayOfYear
+  def hour = self.getHour
+  def minute = self.getMinute
+  def month = self.getMonth
+  def nano = self.getNano
+  def second = self.getSecond
+  def year = self.getYear
 }
 
 trait LocalDateTimeSyntax {

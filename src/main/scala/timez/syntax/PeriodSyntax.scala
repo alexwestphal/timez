@@ -14,9 +14,10 @@
  */
 package timez.syntax
 
-import scalaz.syntax.Ops
 import java.time.Period
+import java.time.temporal.TemporalUnit
 import timez.temporal.Amount.PeriodAmount
+
 
 trait PeriodOps extends Ops[Period] {
 
@@ -26,6 +27,14 @@ trait PeriodOps extends Ops[Period] {
   def *(scalar: Int) = self.multipliedBy(scalar)
 
   def unary_- = self.negated
+
+  def apply(field: TemporalUnit) = self.get(field)
+
+  def chronology = self.getChronology
+  def days = self.getDays
+  def months = self.getMonths
+  def units = self.getUnits
+  def years = self.getYears
 }
 
 trait PeriodSyntax {

@@ -15,12 +15,17 @@
 package timez.syntax
 
 import java.time.YearMonth
-import scalaz.syntax.Ops
+import java.time.temporal.TemporalField
 
 trait YearMonthOps extends Ops[YearMonth] {
 
   def &(dayOfMonth: Int) = self.atDay(dayOfMonth)
   def ~(dayOfMonth: Int) = self.atDay(dayOfMonth)
+
+  def apply(field: TemporalField) = self.get(field)
+
+  def month = self.getMonth
+  def year = self.getYear
 
 }
 

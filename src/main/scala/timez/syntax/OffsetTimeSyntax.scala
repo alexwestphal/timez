@@ -15,11 +15,19 @@
 package timez.syntax
 
 import java.time.{LocalDate, OffsetTime}
-import scalaz.syntax.Ops
+import java.time.temporal.TemporalField
 
 trait OffsetTimeOps extends Ops[OffsetTime] {
 
   def &(date: LocalDate) = self.atDate(date)
+
+  def apply(field: TemporalField) = self.get(field)
+
+  def hour = self.getHour
+  def minute = self.getMinute
+  def nano = self.getNano
+  def offset = self.getOffset
+  def second = self.getSecond
 }
 
 trait OffsetTimeSyntax {

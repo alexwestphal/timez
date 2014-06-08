@@ -14,11 +14,16 @@
  */
 package timez.syntax
 
-import scalaz.syntax.Ops
 import java.time.ZoneOffset
+import java.time.temporal.TemporalField
 
 trait ZoneOffsetOps extends Ops[ZoneOffset] {
 
+  def apply(field: TemporalField) = self.get(field)
+
+  def id = self.getId
+  def rules = self.getRules
+  def totalSeconds = self.getTotalSeconds
 }
 
 trait ZoneOffsetSyntax {

@@ -14,7 +14,6 @@
  */
 package timez.syntax
 
-import scalaz.syntax.Ops
 import timez.Parse
 import java.time.format.DateTimeFormatter
 

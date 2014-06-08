@@ -15,8 +15,7 @@
 package timez.syntax
 
 import java.time.{Period, OffsetTime, LocalTime, LocalDate}
-import scalaz.syntax.Ops
-
+import java.time.temporal.TemporalField
 
 
 trait LocalDateOps extends Ops[LocalDate] {
@@ -29,6 +28,16 @@ trait LocalDateOps extends Ops[LocalDate] {
   def &(time: OffsetTime) = self atTime time
 
   def <->(end: LocalDate) = Period.between(self, end)
+
+  def apply(field: TemporalField) = self.get(field)
+
+  def chronology = self.getChronology
+  def dayOfMonth = self.getDayOfMonth
+  def dayOfWeek = self.getDayOfWeek
+  def dayOfYear = self.getDayOfYear
+  def era = self.getEra
+  def month = self.getMonth
+  def year = self.getYear
 }
 
 trait LocalDateSyntax {

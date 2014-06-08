@@ -15,12 +15,16 @@
 package timez.syntax
 
 import java.time.Month
-import scalaz.syntax.Ops
+import java.time.temporal.TemporalField
 
 trait MonthOps extends Ops[Month] {
 
   def +(months: Long) = self plus months
   def -(months: Long) = self minus months
+
+  def apply(field: TemporalField) = self.get(field)
+
+  def value = self.getValue
 }
 
 trait MonthSyntax {

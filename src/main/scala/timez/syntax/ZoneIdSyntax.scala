@@ -15,10 +15,11 @@
 package timez.syntax
 
 import java.time.ZoneId
-import scalaz.syntax.Ops
 
 trait ZoneIdOps extends Ops[ZoneId] {
 
+  def id = self.getId
+  def rules = self.getRules
 }
 
 trait ZoneIdSyntax {

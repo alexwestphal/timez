@@ -14,7 +14,6 @@
  */
 package timez.syntax
 
-import scalaz.syntax.Ops
 import java.time.{Month, YearMonth}
 import timez.temporal.Amount
 

@@ -14,9 +14,8 @@
  */
 package timez.syntax
 
-import java.time.temporal.{TemporalAmount, Temporal}
-import scalaz.syntax.Ops
 import java.time.Duration
+import java.time.temporal.{TemporalAmount, Temporal}
 
 trait TemporalOps extends Ops[Temporal] {
 

@@ -14,8 +14,8 @@
  */
 package timez.syntax
 
-import scalaz.syntax.Ops
 import java.time.Duration
+import java.time.temporal.TemporalUnit
 import timez.temporal.Amount.DurationAmount
 
 trait DurationOps extends Ops[Duration] {
@@ -27,6 +27,12 @@ trait DurationOps extends Ops[Duration] {
   def /(divisor: Long) = self.dividedBy(divisor)
 
   def unary_- = self.negated
+
+  def apply(field: TemporalUnit) = self.get(field)
+
+  def nano = self.getNano
+  def seconds = self.getSeconds
+  def units = self.getUnits
 }
 
   trait DurationSyntax {
