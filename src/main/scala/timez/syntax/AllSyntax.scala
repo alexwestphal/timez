@@ -14,9 +14,12 @@
  */
 package timez.syntax
 
-trait AllSyntax extends ClockSyntax with DayOfWeekSyntax with DurationSyntax with InstantSyntax with IntSyntax
-  with LocalDateSyntax with LocalDateTimeSyntax with LocalTimeSyntax with MonthSyntax with MonthDaySyntax
-  with OffsetDateTimeSyntax with OffsetTimeSyntax with ParseSyntax with PeriodSyntax with TemporalSyntax
-  with YearSyntax with YearMonthSyntax with ZonedDateTimeSyntax with ZoneIdSyntax with ZoneOffsetSyntax
+import timez.syntax.format.FormatSyntax
+
+trait AllSyntax extends ClockSyntax with DayOfWeekSyntax with DurationSyntax with FormatSyntax with InstantSyntax
+  with IntSyntax with LocalDateSyntax with LocalDateTimeSyntax with LocalTimeSyntax with MonthSyntax
+  with MonthDaySyntax with OffsetDateTimeSyntax with OffsetTimeSyntax with ParseSyntax with PeriodSyntax
+  with TemporalSyntax with YearSyntax with YearMonthSyntax with ZonedDateTimeSyntax with ZoneIdSyntax
+  with ZoneOffsetSyntax
 
 object AllSyntax extends AllSyntax
