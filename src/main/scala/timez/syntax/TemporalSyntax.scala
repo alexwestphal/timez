@@ -16,17 +16,20 @@ package timez.syntax
 
 import java.time.Duration
 import java.time.temporal.{TemporalAmount, Temporal}
+import timez.Conversions.TemporalConversion
 
-trait TemporalOps extends Ops[Temporal] {
+trait TemporalOps[T <: Temporal] extends Ops[T] {
 
   def +(amount: TemporalAmount) = self plus amount
   def -(amount: TemporalAmount) = self minus amount
 
   def <->(end: Temporal): Duration = Duration.between(self,end)
+
+  def to[R <: Temporal](implicit TC: TemporalConversion[T,R]): R = TC(self)
 }
 
 trait TemporalSyntax {
-  implicit def ToTemporalOps(t: Temporal) = new TemporalOps {
-    override def self: Temporal = t
+  implicit def ToTemporalOps[T <: Temporal](t: T) = new TemporalOps[T] {
+    override def self = t
   }
 }

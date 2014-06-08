@@ -24,7 +24,7 @@ trait Parse[T] {
 
 object Parse {
 
-  def apply[T](implicit P: Parse[T]) = P
+  @inline def apply[T](implicit P: Parse[T]) = P
 
   def instance[T](f: CharSequence => T): Parse[T] = new Parse[T] {
     override def parse(text: CharSequence): T = f(text)

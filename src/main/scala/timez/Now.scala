@@ -26,7 +26,7 @@ trait Now[T] {
 
 object Now {
 
-  def apply[T](implicit N: Now[T]) = N
+  @inline def apply[T](implicit N: Now[T]) = N
 
   def instance[T](f: => T, g: Clock => T): Now[T] = new Now[T] {
     override def now: T = f
