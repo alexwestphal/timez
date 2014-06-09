@@ -17,6 +17,7 @@ package timez.syntax.format
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAccessor
 import timez.syntax.Ops
+import timez.Parse
 
 trait DTFOps extends Ops[DateTimeFormatter] {
 
@@ -29,10 +30,15 @@ trait DTFOps extends Ops[DateTimeFormatter] {
   def resolveFields = self.getResolverFields
   def resolverStyle = self.getResolverStyle
   def zone = self.getZone
+
+  def parser[T](implicit P: Parse[T]) = new Parse[T] {
+    def parse(text: CharSequence): T = P.parse(text, self)
+    def parse(text: CharSequence, formatter: DateTimeFormatter): T = P.parse(text, formatter)
+  }
 }
 
 trait DTFSyntax {
-  def ToDTFOps(formatter: DateTimeFormatter) = new DTFOps {
+  implicit def ToDTFOps(formatter: DateTimeFormatter) = new DTFOps {
     override def self = formatter
   }
 }

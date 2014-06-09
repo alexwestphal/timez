@@ -14,12 +14,14 @@
  */
 package timez
 
-import java.time.format.DateTimeFormatter
+import java.time.format.{DateTimeParseException, DateTimeFormatter}
 
 trait Parse[T] {
 
   def parse(text: CharSequence): T
   def parse(text: CharSequence, formatter: DateTimeFormatter): T
+
+  def unapply(text: CharSequence) = try Some(parse(text)) catch { case e: DateTimeParseException => None }
 }
 
 object Parse {

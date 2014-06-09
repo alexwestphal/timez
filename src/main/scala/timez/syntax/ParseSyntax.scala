@@ -21,8 +21,6 @@ trait ParseOps extends Ops[String] {
 
   final def parse[T: Parse] = implicitly[Parse[T]].parse(self)
   final def parse[T: Parse](formatter: DateTimeFormatter) = implicitly[Parse[T]].parse(self, formatter)
-
-  final def parse[T](implicit P: Parse[T], formatter: DateTimeFormatter) = P.parse(self, formatter)
 }
 
 trait ParseSyntax {
