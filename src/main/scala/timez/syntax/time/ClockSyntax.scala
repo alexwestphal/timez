@@ -9,28 +9,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 29/May/2014
- * @version 29/May/2014
+ * @author Alex Westphal 09/Jun/2014
+ * @version 09/Jun/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.YearMonth
-import java.time.temporal.TemporalField
+import java.time.Clock
 
-trait YearMonthOps extends Ops[YearMonth] {
+trait ClockOps extends Ops[Clock] {
 
-  def &(dayOfMonth: Int) = self.atDay(dayOfMonth)
-  def ~(dayOfMonth: Int) = self.atDay(dayOfMonth)
-
-  def apply(field: TemporalField) = self.get(field)
-
-  def month = self.getMonth
-  def year = self.getYear
-
+  def zone = self.getZone
 }
 
-trait YearMonthSyntax {
-  implicit def ToYearMonthOps(ym: YearMonth) = new YearMonthOps {
-    override def self: YearMonth = ym
+trait ClockSyntax {
+  implicit def ToClockOps(clock: Clock) = new ClockOps {
+    override def self = clock
   }
 }

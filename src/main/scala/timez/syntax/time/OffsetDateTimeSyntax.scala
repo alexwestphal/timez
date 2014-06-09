@@ -9,39 +9,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 30/May/2014
- * @version 30/May/2014
+ * @author Alex Westphal 09/Jun/2014
+ * @version 09/Jun/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.{Period, OffsetTime, LocalTime, LocalDate}
+import java.time.OffsetDateTime
 import java.time.temporal.TemporalField
 
-
-trait LocalDateOps extends Ops[LocalDate] {
-
-  def &(hour: Int, minute: Int) = self.atTime(hour, minute)
-  def &(hour: Int, minute: Int, second: Int) = self.atTime(hour, minute, second)
-  def &(hour: Int, minute: Int, second: Int, nano: Int) = self.atTime(hour, minute, second, nano)
-
-  def &(time: LocalTime) = self atTime time
-  def &(time: OffsetTime) = self atTime time
-
-  def <->(end: LocalDate) = Period.between(self, end)
+trait OffsetDateTimeOps extends Ops[OffsetDateTime] {
 
   def apply(field: TemporalField) = self.get(field)
 
-  def chronology = self.getChronology
   def dayOfMonth = self.getDayOfMonth
   def dayOfWeek = self.getDayOfWeek
   def dayOfYear = self.getDayOfYear
-  def era = self.getEra
+  def hour = self.getHour
+  def minute = self.getMinute
   def month = self.getMonth
+  def nano = self.getNano
+  def offset = self.getOffset
+  def second = self.getSecond
   def year = self.getYear
 }
 
-trait LocalDateSyntax {
-  implicit def ToLocalDateOps(date: LocalDate) = new LocalDateOps {
-    override def self = date
+trait OffsetDateTimeSyntax {
+  implicit def ToOffsetDateTimeOps(dateTime: OffsetDateTime) = new OffsetDateTimeOps {
+    override def self = dateTime
   }
 }

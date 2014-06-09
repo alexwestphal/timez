@@ -12,27 +12,24 @@
  * @author Alex Westphal 30/May/2014
  * @version 30/May/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.{ZoneOffset, LocalDate, LocalTime}
-import java.time.temporal.TemporalField
+import java.time.Duration
+import java.time.temporal.{TemporalAmount, Temporal}
+import timez.Conversions.TemporalConversion
 
-trait LocalTimeOps extends Ops[LocalTime] {
+trait TemporalOps[T <: Temporal] extends Ops[T] {
 
-  def &(date: LocalDate) = self atDate date
-  def &(offset: ZoneOffset) = self atOffset offset
+  def +(amount: TemporalAmount) = self plus amount
+  def -(amount: TemporalAmount) = self minus amount
 
-  def apply(field: TemporalField) = self.get(field)
+  def <->(end: Temporal): Duration = Duration.between(self,end)
 
-  def hour = self.getHour
-  def minute = self.getMinute
-  def nano = self.getNano
-  def second = self.getSecond
-
+  def to[R <: Temporal](implicit TC: TemporalConversion[T,R]): R = TC(self)
 }
 
-trait LocalTimeSyntax {
-  implicit def toLocalTimeOps(time: LocalTime) = new LocalTimeOps {
-    override def self = time
+trait TemporalSyntax {
+  implicit def ToTemporalOps[T <: Temporal](t: T) = new TemporalOps[T] {
+    override def self = t
   }
 }

@@ -12,7 +12,7 @@
  * @author Alex Westphal 29/May/2014
  * @version 30/May/2014
  */
-package timez.syntax
+package timez.syntax.time
 
 import java.time.Duration
 import java.time.temporal.TemporalUnit

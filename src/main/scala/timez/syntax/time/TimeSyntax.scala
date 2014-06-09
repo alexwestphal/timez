@@ -9,27 +9,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 30/May/2014
+ * @author Alex Westphal 29/May/2014
  * @version 30/May/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.{ZoneId, ZoneOffset, Instant}
-import java.time.temporal.TemporalField
 
-trait InstantOps extends Ops[Instant] {
+trait TimeSyntax extends ClockSyntax with DayOfWeekSyntax with DurationSyntax with InstantSyntax with LocalDateSyntax
+  with LocalDateTimeSyntax with LocalTimeSyntax with MonthSyntax with MonthDaySyntax with OffsetDateTimeSyntax
+  with OffsetTimeSyntax with PeriodSyntax with TemporalSyntax with YearSyntax with YearMonthSyntax
+  with ZonedDateTimeSyntax with ZoneIdSyntax with ZoneOffsetSyntax
 
-  def &(offset: ZoneOffset) = self.atOffset(offset)
-  def &(zone: ZoneId) = self.atZone(zone)
-
-  def apply(field: TemporalField) = self.get(field)
-
-  def epochSecond = self.getEpochSecond
-  def nano = self.getNano
-}
-
-trait InstantSyntax {
-  implicit def ToInstantOps(instant: Instant) = new InstantOps {
-    override def self = instant
-  }
-}
+object TimeSyntax extends TimeSyntax

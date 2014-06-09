@@ -12,17 +12,25 @@
  * @author Alex Westphal 09/Jun/2014
  * @version 09/Jun/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.Clock
+import java.time.{MonthDay, Month, Year}
+import java.time.temporal.TemporalField
 
-trait ClockOps extends Ops[Clock] {
+trait YearOps extends Ops[Year] {
 
-  def zone = self.getZone
+  def &(day: Int) = self.atDay(day)
+  def &(month: Month) = self.atMonth(month)
+  def &(monthDay: MonthDay) = self.atMonthDay(monthDay)
+
+  def apply(field: TemporalField) = self.get(field)
+
+  def value = self.getValue
 }
 
-trait ClockSyntax {
-  implicit def ToClockOps(clock: Clock) = new ClockOps {
-    override def self = clock
+trait YearSyntax {
+
+  implicit def ToYearOps(year: Year) = new YearOps {
+    override def self = year
   }
 }

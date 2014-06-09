@@ -12,24 +12,26 @@
  * @author Alex Westphal 30/May/2014
  * @version 30/May/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.Duration
-import java.time.temporal.{TemporalAmount, Temporal}
-import timez.Conversions.TemporalConversion
+import java.time.DayOfWeek
+import timez.temporal.Amount
+import java.time.temporal.TemporalField
 
-trait TemporalOps[T <: Temporal] extends Ops[T] {
+trait DayOfWeekOps extends Ops[DayOfWeek] {
 
-  def +(amount: TemporalAmount) = self plus amount
-  def -(amount: TemporalAmount) = self minus amount
+  def +(days: Amount.Days) = self.plus(days.amount)
+  def -(days: Amount.Days) = self.minus(days.amount)
 
-  def <->(end: Temporal): Duration = Duration.between(self,end)
+  def apply(field: TemporalField) = self.get(field)
 
-  def to[R <: Temporal](implicit TC: TemporalConversion[T,R]): R = TC(self)
+  def value = self.getValue
+
 }
 
-trait TemporalSyntax {
-  implicit def ToTemporalOps[T <: Temporal](t: T) = new TemporalOps[T] {
-    override def self = t
+trait DayOfWeekSyntax {
+
+  implicit def ToDayOfWeekOps(day: DayOfWeek) = new DayOfWeekOps {
+    override def self: DayOfWeek = day
   }
 }

@@ -9,14 +9,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 29/May/2014
+ * @author Alex Westphal 30/May/2014
  * @version 30/May/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import timez.syntax.format.FormatSyntax
-import timez.syntax.time.TimeSyntax
+import java.time.MonthDay
+import java.time.temporal.TemporalField
 
-trait AllSyntax extends CalendarSyntax with FormatSyntax with IntSyntax with ParseSyntax with TimeSyntax
+trait MonthDayOps extends Ops[MonthDay] {
 
-object AllSyntax extends AllSyntax
+  def &(year: Int) = self atYear year
+
+  def apply(field: TemporalField) = self.get(field)
+
+  def dayOfMonth = self.getDayOfMonth
+  def month = self.getMonth
+}
+
+trait MonthDaySyntax {
+  implicit def ToMonthDayOps(md: MonthDay) = new MonthDayOps {
+    override def self: MonthDay = md
+  }
+}

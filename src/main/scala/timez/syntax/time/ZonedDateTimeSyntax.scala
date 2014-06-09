@@ -12,29 +12,29 @@
  * @author Alex Westphal 09/Jun/2014
  * @version 09/Jun/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.OffsetDateTime
+import java.time.ZonedDateTime
 import java.time.temporal.TemporalField
 
-trait OffsetDateTimeOps extends Ops[OffsetDateTime] {
+trait ZonedDateTimeOps extends Ops[ZonedDateTime] {
 
   def apply(field: TemporalField) = self.get(field)
 
   def dayOfMonth = self.getDayOfMonth
-  def dayOfWeek = self.getDayOfWeek
-  def dayOfYear = self.getDayOfYear
+  def dayofWeek = self.getDayOfWeek
+  def dayofYear = self.getDayOfYear
   def hour = self.getHour
   def minute = self.getMinute
   def month = self.getMonth
-  def nano = self.getNano
   def offset = self.getOffset
   def second = self.getSecond
   def year = self.getYear
+  def zone = self.getZone
 }
 
-trait OffsetDateTimeSyntax {
-  implicit def ToOffsetDateTimeOps(dateTime: OffsetDateTime) = new OffsetDateTimeOps {
+trait ZonedDateTimeSyntax {
+  implicit def ToZonedDateTimeOps(dateTime: ZonedDateTime) = new ZonedDateTimeOps {
     override def self = dateTime
   }
 }

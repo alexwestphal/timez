@@ -9,28 +9,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 09/Jun/2014
- * @version 09/Jun/2014
+ * @author Alex Westphal 30/May/2014
+ * @version 30/May/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.{MonthDay, Month, Year}
+import java.time.{ZoneId, ZoneOffset, Instant}
 import java.time.temporal.TemporalField
 
-trait YearOps extends Ops[Year] {
+trait InstantOps extends Ops[Instant] {
 
-  def &(day: Int) = self.atDay(day)
-  def &(month: Month) = self.atMonth(month)
-  def &(monthDay: MonthDay) = self.atMonthDay(monthDay)
+  def &(offset: ZoneOffset) = self.atOffset(offset)
+  def &(zone: ZoneId) = self.atZone(zone)
 
   def apply(field: TemporalField) = self.get(field)
 
-  def value = self.getValue
+  def epochSecond = self.getEpochSecond
+  def nano = self.getNano
 }
 
-trait YearSyntax {
-
-  implicit def ToYearOps(year: Year) = new YearOps {
-    override def self = year
+trait InstantSyntax {
+  implicit def ToInstantOps(instant: Instant) = new InstantOps {
+    override def self = instant
   }
 }

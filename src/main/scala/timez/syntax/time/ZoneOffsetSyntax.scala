@@ -9,29 +9,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 30/May/2014
- * @version 30/May/2014
+ * @author Alex Westphal 09/Jun/2014
+ * @version 09/Jun/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.DayOfWeek
-import timez.temporal.Amount
+import java.time.ZoneOffset
 import java.time.temporal.TemporalField
 
-trait DayOfWeekOps extends Ops[DayOfWeek] {
-
-  def +(days: Amount.Days) = self.plus(days.amount)
-  def -(days: Amount.Days) = self.minus(days.amount)
+trait ZoneOffsetOps extends Ops[ZoneOffset] {
 
   def apply(field: TemporalField) = self.get(field)
 
-  def value = self.getValue
 
+  def id = self.getId
+  def rules = self.getRules
+  def totalSeconds = self.getTotalSeconds
 }
 
-trait DayOfWeekSyntax {
-
-  implicit def ToDayOfWeekOps(day: DayOfWeek) = new DayOfWeekOps {
-    override def self: DayOfWeek = day
+trait ZoneOffsetSyntax {
+  implicit def ToZoneOffsetOps(zoneOffset: ZoneOffset) = new ZoneOffsetOps {
+    override def self = zoneOffset
   }
 }

@@ -12,7 +12,7 @@
  * @author Alex Westphal 09/Jun/2014
  * @version 09/Jun/2014
  */
-package timez.syntax
+package timez.syntax.time
 
 import java.time.{LocalDate, OffsetTime}
 import java.time.temporal.TemporalField

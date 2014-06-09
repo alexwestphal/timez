@@ -12,23 +12,18 @@
  * @author Alex Westphal 09/Jun/2014
  * @version 09/Jun/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.ZoneOffset
-import java.time.temporal.TemporalField
+import java.time.ZoneId
 
-trait ZoneOffsetOps extends Ops[ZoneOffset] {
-
-  def apply(field: TemporalField) = self.get(field)
-
+trait ZoneIdOps extends Ops[ZoneId] {
 
   def id = self.getId
   def rules = self.getRules
-  def totalSeconds = self.getTotalSeconds
 }
 
-trait ZoneOffsetSyntax {
-  implicit def ToZoneOffsetOps(zoneOffset: ZoneOffset) = new ZoneOffsetOps {
-    override def self = zoneOffset
+trait ZoneIdSyntax {
+  implicit def ToZoneIdOps(zoneId: ZoneId) = new ZoneIdOps {
+    override def self = zoneId
   }
 }

@@ -9,32 +9,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 09/Jun/2014
- * @version 09/Jun/2014
+ * @author Alex Westphal 30/May/2014
+ * @version 30/May/2014
  */
-package timez.syntax
+package timez.syntax.time
 
-import java.time.ZonedDateTime
+import java.time._
 import java.time.temporal.TemporalField
 
-trait ZonedDateTimeOps extends Ops[ZonedDateTime] {
+trait LocalDateTimeOps extends Ops[LocalDateTime] {
+
+  def &(offset: ZoneOffset) = self.atOffset(offset)
+  def &(zone: ZoneId) = self.atZone(zone)
 
   def apply(field: TemporalField) = self.get(field)
 
   def dayOfMonth = self.getDayOfMonth
-  def dayofWeek = self.getDayOfWeek
-  def dayofYear = self.getDayOfYear
+  def dayOfWeek = self.getDayOfWeek
+  def dayOfYear = self.getDayOfYear
   def hour = self.getHour
   def minute = self.getMinute
   def month = self.getMonth
-  def offset = self.getOffset
+  def nano = self.getNano
   def second = self.getSecond
   def year = self.getYear
-  def zone = self.getZone
 }
 
-trait ZonedDateTimeSyntax {
-  implicit def ToZonedDateTimeOps(dateTime: ZonedDateTime) = new ZonedDateTimeOps {
-    override def self = dateTime
+trait LocalDateTimeSyntax {
+  implicit def ToLocalDateOps(ld: LocalDateTime) = new LocalDateTimeOps {
+    override def self = ld
   }
 }
