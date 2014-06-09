@@ -18,4 +18,4 @@ import timez.functions.AllFunctions
 import timez.instances.AllInstances
 import timez.syntax.AllSyntax
 
-object Timez extends AllInstances with AllFunctions with AllSyntax
+object Timez extends AllInstances with AllFunctions with AllSyntax with Conversions

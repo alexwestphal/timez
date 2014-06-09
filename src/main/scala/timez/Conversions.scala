@@ -17,13 +17,8 @@ package timez
 import java.time._
 import java.time.temporal.Temporal
 
-object Conversions {
-
-  type TemporalConversion[A <: Temporal,B <: Temporal] = A => B
-
-  object TemporalConversion {
-    @inline def apply[A,B](implicit TC: TemporalConversion[A,B]) = TC
-  }
+trait Conversions {
+  import Conversions._
 
   implicit val LocalDateTimeToLocalDate: TemporalConversion[LocalDateTime, LocalDate] = _.toLocalDate
   implicit val LocalDateTimeToLocalTime: TemporalConversion[LocalDateTime, LocalTime] = _.toLocalTime
@@ -41,4 +36,12 @@ object Conversions {
   implicit val ZonedDateTimeToLocalDateTime: TemporalConversion[ZonedDateTime, LocalDateTime] = _.toLocalDateTime
   implicit val ZonedDateTimeToLocalTime: TemporalConversion[ZonedDateTime, LocalTime] = _.toLocalTime
   implicit val ZonedDateTimeToOffsetDateTime: TemporalConversion[ZonedDateTime, OffsetDateTime] = _.toOffsetDateTime
+}
+
+object Conversions extends Conversions {
+  type TemporalConversion[A <: Temporal,B <: Temporal] = A => B
+
+  object TemporalConversion {
+    @inline def apply[A <: Temporal,B <: Temporal](implicit TC: TemporalConversion[A,B]) = TC
+  }
 }
