@@ -12,19 +12,19 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.Year
-import scalaz.{Order, Show}
-import timez.{Now, Parse}
+import java.time.ZonedDateTime
+import scalaz.{Show, Ordering, Order}
+import timez.{Parse, Now}
 
-trait YearInstances {
+trait ZonedDateTimeInstances {
 
-  implicit val YearNow = Now.instance(Year.now, Year.now)
+  implicit val ZonedDateTimeNow = Now.instance(ZonedDateTime.now, ZonedDateTime.now)
 
-  implicit def YearOrder = Order orderBy { year: Year => year.getValue }
+  implicit val ZonedDateTimeOrder = Order.order { (x: ZonedDateTime, y: ZonedDateTime) => Ordering.fromInt(x compareTo y) }
 
-  implicit def YearParse = Parse.instance(Year.parse, Year.parse)
+  implicit val ZonedDateTimeParse = Parse.instance(ZonedDateTime.parse, ZonedDateTime.parse)
 
-  implicit def YearShow = Show.showA[Year]
+  implicit val ZonedDateTimeShow = Show.showA[ZonedDateTime]
 }

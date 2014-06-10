@@ -9,22 +9,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 29/May/2014
- * @version 29/May/2014
+ * @author Alex Westphal 10/Jun/2014
+ * @version 10/Jun/2014
  */
 package timez.instances
 
-import java.time.ZonedDateTime
-import scalaz.{Show, Ordering, Order}
-import timez.{Parse, Now}
+import java.util.Calendar
+import scalaz.Show
 
-trait ZonedDateTimeInstances {
+trait CalendarInstances {
 
-  implicit val ZonedDateTimeNow = Now.instance(ZonedDateTime.now, ZonedDateTime.now)
+  implicit val CalendarOrder = Instance.fromComparable[Calendar]
 
-  implicit val ZonedDateTimeOrder = Order.order { (x: ZonedDateTime, y: ZonedDateTime) => Ordering.fromInt(x compareTo y) }
-
-  implicit val ZonedDateTimeParse = Parse.instance(ZonedDateTime.parse, ZonedDateTime.parse)
-
-  implicit val ZonedDateTimeShow = Show.showA[ZonedDateTime]
+  implicit val CalendarShow = Show.showA[Calendar]
 }

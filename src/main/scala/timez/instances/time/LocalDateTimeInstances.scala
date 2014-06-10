@@ -10,13 +10,21 @@
  * SOFTWARE.
  *
  * @author Alex Westphal 29/May/2014
- * @version 30/May/2014
+ * @version 29/May/2014
  */
-package timez.syntax
+package timez.instances.time
 
-import timez.syntax.format.FormatSyntax
-import timez.syntax.time.TimeSyntax
+import java.time.LocalDateTime
+import timez.{Parse, Now}
+import scalaz.{Show, Ordering, Order}
 
-trait AllSyntax extends CalendarSyntax with DateSyntax with FormatSyntax with IntSyntax with ParseSyntax with TimeSyntax
+trait LocalDateTimeInstances {
 
-object AllSyntax extends AllSyntax
+  implicit val LocalDateTimeNow = Now.instance(LocalDateTime.now, LocalDateTime.now)
+
+  implicit val LocalDateTimeOrder = Order.order { (x: LocalDateTime, y: LocalDateTime) => Ordering.fromInt(x compareTo y) }
+
+  implicit val LocalDateTimeParse = Parse.instance(LocalDateTime.parse, LocalDateTime.parse)
+
+  implicit val LocalDateTimeShow = Show.showA[LocalDateTime]
+}

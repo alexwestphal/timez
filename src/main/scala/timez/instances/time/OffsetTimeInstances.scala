@@ -12,24 +12,19 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.Month
-import scalaz.{Enum, Ordering, Show}
-import timez.Parse
+import java.time.OffsetTime
+import scalaz.{Show, Ordering, Order}
+import timez.{Parse, Now}
 
-trait MonthInstances {
+trait OffsetTimeInstances {
 
-  implicit val MonthEnum: Enum[Month] = new Enum[Month] {
-    def order(x: Month, y: Month) = Ordering.fromInt(x compareTo y)
-    def pred(x: Month) = x.minus(1)
-    def succ(x: Month) = x.plus(1)
-  }
+  implicit val OffsetTimeNow = Now.instance(OffsetTime.now, OffsetTime.now)
 
-  implicit val MonthParse = Parse instance {
-    case s: String => Month.valueOf(s)
-    case s => throw new IllegalArgumentException("Unsupported parse source: "+s.getClass.getName)
-  }
+  implicit val OffsetTimeOrder = Order.order { (x: OffsetTime, y: OffsetTime) => Ordering.fromInt(x compareTo y) }
 
-  implicit def MonthShow = Show.showA[Month]
+  implicit val OffsetTimeParse = Parse.instance(OffsetTime.parse, OffsetTime.parse)
+
+  implicit val OffsetTimeShow = Show.showA[OffsetTime]
 }

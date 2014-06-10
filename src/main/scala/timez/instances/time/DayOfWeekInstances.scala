@@ -12,26 +12,24 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.Period
-import scalaz._
-import scalaz.Ordering
+import java.time.DayOfWeek
+import scalaz.{Enum, Ordering, Show}
 import timez.Parse
 
-trait PeriodInstances {
+trait DayOfWeekInstances {
 
-  implicit val PeriodMonoid: Monoid[Period] = new Monoid[Period] {
-    override def zero: Period = Period.ZERO
-    override def append(f1: Period, f2: => Period): Period = f1 plus f2
+  implicit val DayOfWeekEnum: Enum[DayOfWeek] = new Enum[DayOfWeek] {
+    def order(x: DayOfWeek, y: DayOfWeek) = Ordering.fromInt(x compareTo y)
+    def pred(x: DayOfWeek) = x.minus(1)
+    def succ(x: DayOfWeek) = x.plus(1)
   }
 
-  implicit val PeriodOrder: Order[Period] = new Order[Period] {
-    override def order(x: Period, y: Period): Ordering =
-      if(x == y) Ordering.EQ else if(x.minus(y).isNegative) Ordering.LT else Ordering.GT
+  implicit val DayOfWeekParse = Parse instance {
+    case s: String => DayOfWeek.valueOf(s)
+    case s => throw new IllegalArgumentException("Unsupported parse source: "+s.getClass.getName)
   }
 
-  implicit val PeriodParse: Parse[Period] = Parse.instance(Period.parse)
-
-  implicit val PeriodShow = Show.showA[Period]
+  implicit val DayOfWeekShow = Show.showA[DayOfWeek]
 }

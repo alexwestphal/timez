@@ -12,19 +12,14 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.LocalTime
-import scalaz.{Show, Ordering, Order}
-import timez.{Parse, Now}
+import java.time.ZoneId
+import scalaz.{Equal, Show}
 
-trait LocalTimeInstances {
+trait ZonedIdInstances {
 
-  implicit val LocalTimeNow = Now.instance(LocalTime.now, LocalTime.now)
+  implicit def ZoneIdEqual = Equal.equalA[ZoneId]
 
-  implicit val LocalTimeOrder = Order.order { (x: LocalTime, y: LocalTime) => Ordering.fromInt(x compareTo y) }
-
-  implicit val LocalTimeParse = Parse.instance(LocalTime.parse, LocalTime.parse)
-
-  implicit val LocalTimeShow = Show.showA[LocalTime]
+  implicit def ZoneIdShow = Show.showA[ZoneId]
 }

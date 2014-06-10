@@ -12,14 +12,20 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.ZoneId
-import scalaz.{Equal, Show}
+import java.time.Duration
+import scalaz._
+import timez.Parse
+import timez.instances.Instance
 
-trait ZonedIdInstances {
+trait DurationInstances {
 
-  implicit def ZoneIdEqual = Equal.equalA[ZoneId]
+  implicit val DurationMonoid = Monoid.instance[Duration](_.plus(_), Duration.ZERO)
 
-  implicit def ZoneIdShow = Show.showA[ZoneId]
+  implicit val DurationOrder = Instance.fromComparable[Duration]
+
+  implicit val DurationParse = Parse.instance(Duration.parse)
+
+  implicit val DurationShow = Show.showA[Duration]
 }

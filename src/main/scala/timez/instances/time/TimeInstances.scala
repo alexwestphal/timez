@@ -9,17 +9,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 29/May/2014
- * @version 29/May/2014
+ * @author Alex Westphal 10/Jun/2014
+ * @version 10/Jun/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.ZoneOffset
-import scalaz.{Ordering, Order, Show}
+trait TimeInstances extends ClockInstances with DayOfWeekInstances with DurationInstances with InstanceInstances
+with LocalDateInstances with LocalDateTimeInstances with LocalTimeInstances with MonthDayInstances
+with MonthInstances with OffsetDateTimeInstances with OffsetTimeInstances with PeriodInstances
+with YearInstances with ZonedDateTimeInstances with ZonedIdInstances with ZoneOffsetInstances
 
-trait ZoneOffsetInstances {
-
-  implicit def ZoneOffsetOrder = Order order { (x: ZoneOffset, y: ZoneOffset) => Ordering.fromInt(x compareTo y) }
-
-  implicit def ZoneOffsetShow = Show.showA[ZoneOffset]
-}
+object TimeInstances extends TimeInstances

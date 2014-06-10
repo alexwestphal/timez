@@ -18,9 +18,6 @@ import java.util.{TimeZone, Date, Locale, Calendar}
 
 trait CalendarOps extends Ops[Calendar] {
 
-  def <(when: Any) = self.after(when)
-  def >(when: Any) = self.before(when)
-
   def apply(field: Int) = self.get(field)
   def update(field: Int, value: Int) = self.set(field, value)
 

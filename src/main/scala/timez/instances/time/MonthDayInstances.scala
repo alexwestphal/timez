@@ -12,19 +12,20 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.OffsetDateTime
-import scalaz.{Show, Ordering, Order}
+import java.time.MonthDay
+import scalaz.Show
 import timez.{Parse, Now}
+import timez.instances.Instance
 
-trait OffsetDateTimeInstances {
+trait MonthDayInstances {
 
-  implicit val OffsetDateTimeNow = Now.instance(OffsetDateTime.now, OffsetDateTime.now)
+  implicit val MonthDayNow = Now.instance(MonthDay.now, MonthDay.now)
 
-  implicit val OffsetDateTimeOrder = Order.order { (x: OffsetDateTime, y: OffsetDateTime) => Ordering.fromInt(x compareTo y) }
+  implicit val MonthDayOrder = Instance.fromComparable[MonthDay]
 
-  implicit val OffsetDateTimeParse = Parse.instance(OffsetDateTime.parse, OffsetDateTime.parse)
+  implicit val MonthDayParse = Parse.instance(MonthDay.parse, MonthDay.parse)
 
-  implicit val OffsetDateTimeShow = Show.showA[OffsetDateTime]
+  implicit val MonthDayShow = Show.showA[MonthDay]
 }

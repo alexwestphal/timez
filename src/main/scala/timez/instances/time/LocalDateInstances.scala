@@ -12,7 +12,7 @@
  * @author Alex Westphal 29/May/2014
  * @version 30/May/2014
  */
-package timez.instances
+package timez.instances.time
 
 import java.time.LocalDate
 import scalaz.{Ordering, Order, Show}

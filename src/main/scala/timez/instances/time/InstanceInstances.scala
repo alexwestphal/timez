@@ -10,21 +10,22 @@
  * SOFTWARE.
  *
  * @author Alex Westphal 29/May/2014
- * @version 29/May/2014
+ * @version 30/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.MonthDay
+import java.time.Instant
 import scalaz.Show
 import timez.{Parse, Now}
+import timez.instances.Instance
 
-trait MonthDayInstances {
+trait InstanceInstances {
 
-  implicit val MonthDayNow = Now.instance(MonthDay.now, MonthDay.now)
+  implicit val InstantNow = Now.instance(Instant.now, Instant.now)
 
-  implicit val MonthDayOrder = Instance.fromComparable[MonthDay]
+  implicit val InstantOrder = Instance.fromComparable[Instant]
 
-  implicit val MonthDayParse = Parse.instance(MonthDay.parse, MonthDay.parse)
+  implicit val InstantParse = Parse.instance(Instant.parse)
 
-  implicit val MonthDayShow = Show.showA[MonthDay]
+  implicit val InstantShow = Show.showA[Instant]
 }

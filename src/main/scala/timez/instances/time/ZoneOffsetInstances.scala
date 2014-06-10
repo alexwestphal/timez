@@ -12,14 +12,14 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.Clock
-import scalaz.{Show, Equal}
+import java.time.ZoneOffset
+import scalaz.{Ordering, Order, Show}
 
-trait ClockInstances {
+trait ZoneOffsetInstances {
 
-  implicit val ClockEqual = Equal.equalA[Clock]
+  implicit def ZoneOffsetOrder = Order order { (x: ZoneOffset, y: ZoneOffset) => Ordering.fromInt(x compareTo y) }
 
-  implicit val ClockShow = Show.showA[Clock]
+  implicit def ZoneOffsetShow = Show.showA[ZoneOffset]
 }

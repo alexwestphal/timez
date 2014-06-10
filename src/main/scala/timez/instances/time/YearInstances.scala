@@ -10,21 +10,21 @@
  * SOFTWARE.
  *
  * @author Alex Westphal 29/May/2014
- * @version 30/May/2014
+ * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.Instant
-import scalaz.Show
-import timez.{Parse, Now}
+import java.time.Year
+import scalaz.{Order, Show}
+import timez.{Now, Parse}
 
-trait InstanceInstances {
+trait YearInstances {
 
-  implicit val InstantNow = Now.instance(Instant.now, Instant.now)
+  implicit val YearNow = Now.instance(Year.now, Year.now)
 
-  implicit val InstantOrder = Instance.fromComparable[Instant]
+  implicit def YearOrder = Order orderBy { year: Year => year.getValue }
 
-  implicit val InstantParse = Parse.instance(Instant.parse)
+  implicit def YearParse = Parse.instance(Year.parse, Year.parse)
 
-  implicit val InstantShow = Show.showA[Instant]
+  implicit def YearShow = Show.showA[Year]
 }

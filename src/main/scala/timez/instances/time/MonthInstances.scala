@@ -10,13 +10,26 @@
  * SOFTWARE.
  *
  * @author Alex Westphal 29/May/2014
- * @version 30/May/2014
+ * @version 29/May/2014
  */
-package timez.syntax
+package timez.instances.time
 
-import timez.syntax.format.FormatSyntax
-import timez.syntax.time.TimeSyntax
+import java.time.Month
+import scalaz.{Enum, Ordering, Show}
+import timez.Parse
 
-trait AllSyntax extends CalendarSyntax with DateSyntax with FormatSyntax with IntSyntax with ParseSyntax with TimeSyntax
+trait MonthInstances {
 
-object AllSyntax extends AllSyntax
+  implicit val MonthEnum: Enum[Month] = new Enum[Month] {
+    def order(x: Month, y: Month) = Ordering.fromInt(x compareTo y)
+    def pred(x: Month) = x.minus(1)
+    def succ(x: Month) = x.plus(1)
+  }
+
+  implicit val MonthParse = Parse instance {
+    case s: String => Month.valueOf(s)
+    case s => throw new IllegalArgumentException("Unsupported parse source: "+s.getClass.getName)
+  }
+
+  implicit def MonthShow = Show.showA[Month]
+}

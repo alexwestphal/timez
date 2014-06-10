@@ -9,22 +9,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 29/May/2014
- * @version 29/May/2014
+ * @author Alex Westphal 10/Jun/2014
+ * @version 10/Jun/2014
  */
-package timez.instances
+package timez.syntax
 
-import java.time.Duration
-import scalaz._
-import timez.Parse
+import java.util.Date
 
-trait DurationInstances {
+trait DateOps extends Ops[Date] {
 
-  implicit val DurationMonoid = Monoid.instance[Duration](_.plus(_), Duration.ZERO)
+  def time = self.getTime
+  def time_=(time: Long) = self.setTime(time)
+}
 
-  implicit val DurationOrder = Instance.fromComparable[Duration]
-
-  implicit val DurationParse = Parse.instance(Duration.parse)
-
-  implicit val DurationShow = Show.showA[Duration]
+trait DateSyntax {
+  implicit def ToDateOps(date: Date) = new DateOps {
+    override def self = date
+  }
 }

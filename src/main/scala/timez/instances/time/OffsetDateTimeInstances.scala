@@ -12,24 +12,19 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.DayOfWeek
-import scalaz.{Enum, Ordering, Show}
-import timez.Parse
+import java.time.OffsetDateTime
+import scalaz.{Show, Ordering, Order}
+import timez.{Parse, Now}
 
-trait DayOfWeekInstances {
+trait OffsetDateTimeInstances {
 
-  implicit val DayOfWeekEnum: Enum[DayOfWeek] = new Enum[DayOfWeek] {
-    def order(x: DayOfWeek, y: DayOfWeek) = Ordering.fromInt(x compareTo y)
-    def pred(x: DayOfWeek) = x.minus(1)
-    def succ(x: DayOfWeek) = x.plus(1)
-  }
+  implicit val OffsetDateTimeNow = Now.instance(OffsetDateTime.now, OffsetDateTime.now)
 
-  implicit val DayOfWeekParse = Parse instance {
-    case s: String => DayOfWeek.valueOf(s)
-    case s => throw new IllegalArgumentException("Unsupported parse source: "+s.getClass.getName)
-  }
+  implicit val OffsetDateTimeOrder = Order.order { (x: OffsetDateTime, y: OffsetDateTime) => Ordering.fromInt(x compareTo y) }
 
-  implicit val DayOfWeekShow = Show.showA[DayOfWeek]
+  implicit val OffsetDateTimeParse = Parse.instance(OffsetDateTime.parse, OffsetDateTime.parse)
+
+  implicit val OffsetDateTimeShow = Show.showA[OffsetDateTime]
 }

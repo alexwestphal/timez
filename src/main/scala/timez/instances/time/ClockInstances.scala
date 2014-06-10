@@ -12,19 +12,14 @@
  * @author Alex Westphal 29/May/2014
  * @version 29/May/2014
  */
-package timez.instances
+package timez.instances.time
 
-import java.time.OffsetTime
-import scalaz.{Show, Ordering, Order}
-import timez.{Parse, Now}
+import java.time.Clock
+import scalaz.{Show, Equal}
 
-trait OffsetTimeInstances {
+trait ClockInstances {
 
-  implicit val OffsetTimeNow = Now.instance(OffsetTime.now, OffsetTime.now)
+  implicit val ClockEqual = Equal.equalA[Clock]
 
-  implicit val OffsetTimeOrder = Order.order { (x: OffsetTime, y: OffsetTime) => Ordering.fromInt(x compareTo y) }
-
-  implicit val OffsetTimeParse = Parse.instance(OffsetTime.parse, OffsetTime.parse)
-
-  implicit val OffsetTimeShow = Show.showA[OffsetTime]
+  implicit val ClockShow = Show.showA[Clock]
 }

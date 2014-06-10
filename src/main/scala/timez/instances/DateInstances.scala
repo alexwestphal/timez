@@ -9,22 +9,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * @author Alex Westphal 29/May/2014
- * @version 29/May/2014
+ * @author Alex Westphal 10/Jun/2014
+ * @version 10/Jun/2014
  */
 package timez.instances
 
-import java.time.LocalDateTime
-import timez.{Parse, Now}
-import scalaz.{Show, Ordering, Order}
+import java.util.Date
+import scalaz.Show
 
-trait LocalDateTimeInstances {
+trait DateInstances {
 
-  implicit val LocalDateTimeNow = Now.instance(LocalDateTime.now, LocalDateTime.now)
+  implicit val DateOrder = Instance.fromComparable[Date]
 
-  implicit val LocalDateTimeOrder = Order.order { (x: LocalDateTime, y: LocalDateTime) => Ordering.fromInt(x compareTo y) }
-
-  implicit val LocalDateTimeParse = Parse.instance(LocalDateTime.parse, LocalDateTime.parse)
-
-  implicit val LocalDateTimeShow = Show.showA[LocalDateTime]
+  implicit val DateShow = Show.showA[Date]
 }

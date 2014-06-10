@@ -14,9 +14,8 @@
  */
 package timez.instances
 
-trait AllInstances extends ClockInstances with DayOfWeekInstances with DurationInstances with InstanceInstances
-  with LocalDateInstances with LocalDateTimeInstances with LocalTimeInstances with MonthDayInstances
-  with MonthInstances with OffsetDateTimeInstances with OffsetTimeInstances with PeriodInstances
-  with YearInstances with ZonedDateTimeInstances with ZonedIdInstances with ZoneOffsetInstances
+import timez.instances.time.TimeInstances
+
+trait AllInstances extends CalendarInstances with DateInstances with TimeInstances
 
 object AllInstances extends AllInstances
